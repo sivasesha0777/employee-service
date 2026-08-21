@@ -53,7 +53,7 @@ jobs:
       - name: SonarQube analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: http://localhost:9000
+          SONAR_HOST_URL: http://localhost:9002
         run: |
           mvn sonar:sonar \
             -Dsonar.projectKey=employee-service \
