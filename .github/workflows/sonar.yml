@@ -19,7 +19,7 @@ permissions:
 jobs:
   sonar-analysis:
     name: Build, Test & SonarQube
-    runs-on: self-hosted
+    runs-on: [self-hosted, Windows, X64]
 
     steps:
 
@@ -32,13 +32,13 @@ jobs:
           fetch-depth: 0
 
       # --------------------------------------------------
-      # 2. Setup Java 17
+      # 2. Setup Java 21
       # --------------------------------------------------
-      - name: Setup Java 17
+      - name: Setup Java 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '21'
           cache: maven
 
       # --------------------------------------------------
@@ -54,9 +54,9 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: http://localhost:9002
-        run: |
-          mvn sonar:sonar \
-            -Dsonar.projectKey=employee-service \
-            -Dsonar.projectName="Employee Service" \
-            -Dsonar.host.url=$SONAR_HOST_URL \
-            -Dsonar.token=$SONAR_TOKEN
+        run: >
+          mvn sonar:sonar
+          -Dsonar.projectKey=employee-service
+          -Dsonar.projectName="Employee Service"
+          -Dsonar.host.url=$env:SONAR_HOST_URL
+          -Dsonar.token=$env:SONAR_TOKEN
