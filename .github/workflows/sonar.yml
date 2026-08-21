@@ -111,7 +111,7 @@ jobs:
 
           echo Running SonarQube analysis...
 
-          mvn sonar:sonar ^
+          mvn org.sonarsource.scanner.maven:sonar-maven-plugin:5.3.1.3596:sonar ^
             -Dsonar.projectKey=employee-service ^
             -Dsonar.projectName="Employee Service" ^
             -Dsonar.host.url=%SONAR_HOST_URL% ^
